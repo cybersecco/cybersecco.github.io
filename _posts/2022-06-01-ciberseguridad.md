@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Que es la Ciberseguridad?
-excerpt: "Se puede definir como el conjunto de herramientas, procesos y practicas periodicas para proteger los datos, las redes  y las computadoras  porque asi se pueden evitar ataques ciberneticos y el uso indebido de la informacion. Hoy en dia las personas usan continuamente Internet para anunciar productos, ventas, para comunicarse con las demas personas, para realizar transacciones financieras, debido a esto los ciber criminales o ciber delincuentes utlizan el Internet como herramienta para realizar ataques ciberneticos ya sea propagacion de malware, entre otros."
+excerpt: "Se puede definir como el conjunto de herramientas, procesos y practicas periodicas para proteger los datos, las redes  y las computadoras  porque asi se pueden evitar ataques ciberneticos y el uso indebido de la informacion."
 date: 2022-06-01
 classes: wide 
 header:
@@ -38,8 +38,6 @@ La seguridad de la red tiene como objetivo proteger la usabilidad, la integridad
 - ### Seguridad de la aplicacion
 
 Esta seguridad tiene como objetivo proteger las aplicaciones de software de las vulnerabilidades que surgen dia a dia que ocurren debido a fallas en los disenos, en el codigo, en la instalacion, en la actualizacion o inclusive en el mantenimiento de la aplicacion.
-
-![](/assets/images/ciberseguridad/seguridad-aplicacion.png)
                     
 En la Ciberseguridad existen diferentes amenazas informaticas que son un riesgo para los sistemas y la informacion de la empresa, sobre todo en entornos altamente digitalizados y dependientes de servicios TI. Una amenaza informatica es toda aquella accion que aprovecha una vulnerabilidad para atacar, espiar o invadir un sistema informatico. 
 
