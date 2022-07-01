@@ -15,6 +15,8 @@ tags:
 - conceptos
 ---
 
+![](/assets/images/ciberseguridad/cyberimg.png)
+
 Se puede definir como el conjunto de herramientas, procesos y practicas periodicas para proteger los datos, las redes  y las computadoras  porque asi se pueden evitar ataques ciberneticos y el uso indebido de la informacion. Hoy en dia las personas usan continuamente Internet para anunciar productos, ventas, para comunicarse con las demas personas, para realizar transacciones financieras, debido a esto los ciber criminales o ciber delincuentes utlizan el Internet como herramienta para realizar ataques ciberneticos ya sea propagacion de malware, entre otros.
 
 El objetivo principal de la Ciberseguridad es la proteccion de datos y su infraestructura, ya que estos ataques ciberneticos y digitales su objetivo es el acceso al sistema para alterar, robar o eliminar informacion sensible que no esta expuesta al publicos y asi realizar extorsiones de dinero a cambios de victimas, de la informacion o inclusive de eliminar las interrupciones de las operaciones comerciales de la empresa.
