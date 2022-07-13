@@ -101,9 +101,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "Nicolas Felipe"
+  name             : "Cybersecco"
   avatar           : "/assets/images/avatar.png"
-  bio              : "Ingeniero en Sistemas, CTF player en<br>HackTheBox, TryHackMe"
+  bio              : "Ingeniero de Sistemas, CTF player en<br>HackTheBox, TryHackMe"
   location         : "Colombia"
   email            : "nicol4s@email.com"
   uri              :

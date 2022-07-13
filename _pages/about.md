@@ -1,6 +1,6 @@
 ---
 layout: splash
-title: "Acerca de"
+title: "Contacto"
 permalink: /about/
 date: 2022-05-31
 ---
@@ -10,7 +10,7 @@ date: 2022-05-31
 <img src="/assets/images/about/photo-portada.jpeg" width = "300" height = "300" >
 </p>
 
-Me llamo Nicolas Felipe Lozano, soy ingeniero de sistemas y me gusta el campo de la ciberseguridad, muy pronto esta seccion estara rellenada
+Me llamo Nicolas Lozano, soy estudiante de ingenieria de sistemas, me gusta el campo de la ciberseguridad y programar.
 
 ## Estudios
 
