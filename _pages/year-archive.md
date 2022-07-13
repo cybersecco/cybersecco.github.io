@@ -1,6 +1,6 @@
 ---
-title: "Articulos"
-permalink: /year-archive/
+title: Articulos
+permalink: /blog/
 layout: posts
 author_profile: true
 ---
