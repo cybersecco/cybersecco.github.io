@@ -25,7 +25,7 @@ section{
 }
 
 .home .content h3 span{
-    color:#c80000;
+    color:#00adb5;
     text-transform: uppercase;
 }
 
@@ -40,7 +40,7 @@ section{
     display: inline-block;
     margin-top: 1rem;
     padding: .35rem 1.5rem;
-    background: linear-gradient(20deg,#313131,#c80000);
+    background: linear-gradient(20deg,#313131,#00adb5);
     color: #ffffff;
     border-radius: 5rem;
     cursor: pointer;
