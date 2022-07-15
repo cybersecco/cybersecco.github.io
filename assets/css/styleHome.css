@@ -21,7 +21,6 @@ section{
 .home .content h3{
     font-size: 3.5rem;
     text-transform: uppercase;
-    color:#ffffff
 }
 
 .home .content h3 span{
@@ -30,27 +29,8 @@ section{
 }
 
 .home .content p{
-    font-size: 1.0rem;
-    color: white;
     padding: 1rem 0;
     padding-right: 100px;
-}
-
-.btn {
-    font-size: 1.0rem;
-    display: inline-block;
-    margin-top: 1rem;
-    padding: .35rem 1.5rem;
-    background: white;
-    color: #aa0000;
-    border-radius: 5rem;
-    cursor: pointer;
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-    transition: all .3s linear;
-}
-
-.btn:hover{
-    transform: scale(1.1);
 }
 
 @media (max-width:1200px) {
@@ -73,7 +53,7 @@ section{
         width: 100%;
     }
     .home .content h3{
-        font-size: 3.6rem;
+        font-size: 3.5rem;
     }
     .home .content p{
         font-size: 1.5rem;
