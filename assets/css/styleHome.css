@@ -15,7 +15,7 @@ section{
 .home .image img{
         width: 40vw;
         animation: float 3s linear infinite;
-        opacity: 0.3;
+        
 }
   
 .home .content h3{
