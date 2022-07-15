@@ -2,7 +2,7 @@
 section{
     min-height: 100vh;
     padding: 0 9%;
-    padding-top: 7.5rem;
+    padding-top: 0.5rem;
     padding-bottom: 2rem;
 }
 
@@ -25,14 +25,15 @@ section{
 }
 
 .home .content h3 span{
-    color:#00adb5;
+    color:#aa0000;
     text-transform: uppercase;
 }
 
 .home .content p{
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: white;
     padding: 1rem 0;
+    padding-right: 100px;
 }
 
 .btn {
@@ -40,8 +41,8 @@ section{
     display: inline-block;
     margin-top: 1rem;
     padding: .35rem 1.5rem;
-    background: linear-gradient(20deg,#313131,#00adb5);
-    color: #ffffff;
+    background: linear-gradient(100deg,#ffffff, #aa0000);
+    color: #252a34;
     border-radius: 5rem;
     cursor: pointer;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);

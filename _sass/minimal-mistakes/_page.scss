@@ -356,7 +356,7 @@
 .back-to-top {
   display: block;
   clear: both;
-  color: lighten($text-color, 50%);
+  color: rgba($color: #aa0000, $alpha: 1.0);
   font-size: 0.6em;
   text-transform: uppercase;
   text-align: right;
