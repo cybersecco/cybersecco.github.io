@@ -18,8 +18,7 @@
 }
 
 div .image img{
-    width: 200;
-    height: 200;
+    width: 30vh;
     animation: float 3s linear infinite;
 }
 

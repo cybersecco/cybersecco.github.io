@@ -79,10 +79,98 @@ UDP significa Protocolo de Datagramas de Usario, es un protocolo del nivel de ca
 
 ## Cliente UDP
 
-El codigo para crear un cliente UDP es similar al del TCP solo que algunos cambios, solo dos cambios
+El codigo para crear un cliente UDP es similar al del TCP solo que algunos cambios, solo dos.
 
 ### codigo cliente udp basico
 ```python
+# Cambiamos el parametro de SOCK_STREAM por SOCK_DGRAM
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 
+# Para enviar los datos usamos la funcion sendto() pasandole los parametros de host y port
+client.sendto(b'test',(target_host, target_port))
+
+# Recibimos los datos con recvfrom()
+data, address = client.recvfrom(4096)
+
+#Imprimimos el mnsaje y cerramos el cliente
+print(data.decode())
+client.close()
 
 ```
+Estos fragmentos de codigo son lo suficientemente rapidos y faciles para tareas diarias en el mundo de los hackers.
+
+<p align="center" >
+<img src='/assets/images/TCP-network/server-tcp.jpeg' width="500" />
+</p>
+
+# Servidor TCP
+
+Recordemos que un servidor es una aplicacion que ofrece un servicio a usuarios de internet y TCP es un protocolo orientado a conexion. Entonces un usuario invoca la parte cliente de la aplicacion, la cual esta construye una solicitud para ese servicio y se la envia al servidor de la aplicacion que usa TCP/IP.
+
+Asi si creamos nuestro propio servidor TCP podemos hacer uso de las posibles reverse shells que creemos o simplemente un shell de comandos o inclusive al crear un proxy.
+
+```python
+
+# Como siempre hacemos uso del modulo socket 
+import socket
+
+# Importamos el modulo threading para hacer posible la programacion con hilos
+import threading
+
+# Definimos las variables 
+IP = '0.0.0.0'
+PORT = 9998
+
+# creamos la funcion principal donde creamos el objeto de socket llamado en este caso server.
+def main():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    #Le pasamos las variables con la funcion bind()
+    server.bind((IP, PORT))
+    
+    # Y ponemos el servidor en escucha con una acumulacion maxima de conexiones establecida en 5
+    server.listen(5)
+
+    print(f'[*] Listening on {IP}:{PORT}')
+
+    # Colocamos el servidor en un bucle principal, claro dentro dela funcion principal donde espera una conexion entrante.
+    while True:
+
+        # Cuando el cliente se conecta, se recibe socket del cliente en la variable de cliente y los detalles de la conexion remota
+        client, address = server.accept()
+        print(f'[*] Accepted connection from {address[0]}:{address[1]}')
+        client_handler = threading.Thread(target=handle_client, args=(client,))
+        client_handler.start()
+
+    # Creamos una funcion dentro de la funcion principal donde la pasamos como
+    # argumento el socket_client
+    def handle_client(client_socket):
+        
+        # Aqui le indicamos manejar la conexion de cliente, momento en el
+        # que el programa esta listo
+        with client_socket as sock:
+            request = sock.recv(1024)
+            print(f'[*] Received: {request.decode("utf-8")}')
+            sock.send(b'ACK')
+
+
+if __name__ == '__main__':
+    main()
+```
+<br>
+
+# Pruebas
+
+---
+
+Pasemos ahora a hacer algunas pruebas de conexion y demas para verificar si todo anda bien, como hacemos estas pruebas?. Ya tenemos un cliente TCP, ahora tenemos el servidor TCP, vamos a configurar el codigo para crear la conexion entre ambos, esto modificando las variables de entrada las cuales son la IP y el PORT
+
+![](/assets/images/TCP-network/codeTcp.png)
+
+![](/assets/images/TCP-network/consoleTcp.png)
+
+Despues de cambiado el puerto y la ip en el cliente TCP del lado de la victima y de haber sido enviado el mensaje, pasamos a correr el servidor desde la maquina del atacante y a ponerlo en escucha a ver que recibimos.
+
+![](/assets/images/TCP-network/consolanicol.png)
+
+Y ahi vemos el mensaje "Esto es una prueba" que enviamos desde el cliente TCP, lo hemos recibo en el servidor TCP y ademas recibimos una confirmacion que fue "ACK" y esto quiere acknowledgement, este mensaje de comunicacion entre computadoras y hace referencia a la confirmacion del mensaje
