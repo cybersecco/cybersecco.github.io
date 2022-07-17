@@ -31,7 +31,7 @@
   /* button colors */
   $buttoncolors:
   (primary, $primary-color),
-  (inverse, #fff),
+  (inverse, #eaeaea),
   (light-outline, transparent),
   (success, $success-color),
   (warning, $warning-color),
@@ -57,7 +57,7 @@
       }
 
       &:hover {
-        @include yiq-contrasted(mix(#000, $color, 20%));
+        @include yiq-contrasted(mix(#000, #aa0000, 20%));
       }
     }
   }
