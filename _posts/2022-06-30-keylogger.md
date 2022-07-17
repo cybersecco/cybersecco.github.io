@@ -1,7 +1,7 @@
 ---
 layout: single
-title: "Keylogger: Que es y como crear un keylogger basico"
-excerpt: "Un Keylogger es un pequeño programa diseñado para capturar todas las pulsaciones que son realizadas por un teclado, para guardarlas en un registro que puede verse luego en un ordenador local, o puede ser enviado con rapidez y seguridad a través de Internet a un equipo remoto."
+title: "Teoria y creacion de un keylogger basico"
+excerpt: "Un keylogger es un programa comúnmente utilizado por actores maliciosos para registrar y almacenar las pulsaciones del teclado con la intención de robar contraseñas o espiar en el equipo de la víctima. "
 date: 2022-06-30
 classes: wide
 header:
@@ -9,7 +9,6 @@ header:
  teaser_home_page: true
 categories:
   - programacion
-  - ciberseguridad
 tags:
   - seguridad
   - spyware
@@ -17,6 +16,10 @@ tags:
   - python
   - malware
 ---
+
+<p align="center" >
+<img src='/assets/images/keylogger/keylogger.png' width='300' height='300'/>
+</p>
 
 Un Keylogger es un pequeño programa diseñado para capturar todas las pulsaciones que son realizadas por un teclado, para guardarlas en un registro que puede verse luego en un ordenador local, o puede ser enviado con rapidez y seguridad a través de Internet a un equipo remoto. Sin embargo los keyloggers no siempre se basan en _software_, sino que tambien pueden estar basados en _hardware_, mas adelanto explico cada uno, pero en este post nos enfocaremos en el keylogger basado en software ya que capturaremos la escritura de teclas de la victima.
 

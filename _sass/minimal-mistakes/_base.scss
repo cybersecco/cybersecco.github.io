@@ -31,6 +31,7 @@ h6 {
   line-height: 1.2;
   font-family: $header-font-family;
   font-weight: bold;
+  color: #aa0000;
 }
 
 h1 {
@@ -131,11 +132,11 @@ a {
   }
 
   &:visited {
-    color: $link-color-visited;
+    color: #ffffff;
   }
 
   &:hover {
-    color: $link-color-hover;
+    color: #aa0000;
     outline: 0;
   }
 }

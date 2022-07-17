@@ -22,6 +22,10 @@ div .image img{
     height: 200;
     animation: float 3s linear infinite;
 }
+
+div h1{
+    color:azure;
+}
 div h1 span{
     color: #aa0000;
 }
