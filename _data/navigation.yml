@@ -5,9 +5,9 @@ main:
     url: /blog/
   - title: "Categorias"
     url: /categories/
+  - title: "Etiquetas"
+    url: /tags/
   - title: "Contacto"
     url: /about/
 
-#- title: "Etiquetas"
-   # url: /tags/
   
