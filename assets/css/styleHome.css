@@ -1,37 +1,41 @@
-.fles {
-    flex-flow: column-reverse;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#contenedor {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+  }
+
+#principal{
+    width: 75%;
+    float: left;
 }
 
-div .image img{
-    width: 30vh;
-    animation: float 3s linear infinite;
-}
-
-div h1{
-    color:azure;
-}
-div h1 span{
-    color: #aa0000;
-}
-
-section {
-    padding-top: 3rem;
-    padding-bottom: 2rem;
-}
-
-div .content h1{
-    font-size: 3.5rem;
+#principal h1 {
+    font-size: 300%;
     text-transform: uppercase;
 }
 
-@keyframes float {
-    0%, 100%{
-        transform: translateY(0rem);
+#principal h1 span{
+    color:#ffffff
+}
+  
+#imagen{
+    width: 20%;
+    float: right;
+    animation: float 3s linear infinite;
+}
+
+.clearfix:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@keyframes float{
+    0%, 100% {
+        transform: translateY(2.5rem);
     }
-    50%{
-        transform: translateY(-3.5rem);
+
+    50% {
+        transform: translateY(4rem);
     }
 }
