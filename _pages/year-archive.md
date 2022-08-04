@@ -1,6 +1,6 @@
 ---
-title: Articulos Recientes
+title: Blog
 permalink: /blog/
-layout: posts
+layout: home
 author_profile: true
 ---
