@@ -15,7 +15,7 @@ remote_theme             : "mmistakes/minimal-mistakes@4.15.1"
 minimal_mistakes_skin    : "dark" #"haxor", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "es-CO"
 title                    : "Cybersecco"
 title_separator          : "|"
 name                     : "Nicol4s"
@@ -78,7 +78,7 @@ naver_site_verification  :
 
 # Social Sharing
 twitter:
-  username               :
+  username               : "cybersecco"
 facebook:
   username               :
   app_id                 :
@@ -103,7 +103,7 @@ analytics:
 author:
   name             : "Cybersecco"
   avatar           : "/assets/images/avatar.png"
-  bio              : "Ingeniero de Sistemas, CTF player en<br>HackTheBox, TryHackMe"
+  bio              : "Estudiante de Ingeniería de Sistemas, CTF player"
   location         : "Colombia"
   email            : "nicol4s@email.com"
   uri              :
@@ -126,11 +126,11 @@ author:
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
   steam            : # "steamId" (the last part of your profile url, e.g. https://steamcommunity.com/id/steamId/)
   tumblr           :
-  twitter          :
+  twitter          : "cybersecco"
   vine             :
   weibo            :
   xing             :
-  youtube          : # "https://youtube.com/c/MichaelRoseDesign"
+  youtube          : "https://youtube.com/@cybersecco6405"
 
 
 # Reading Files

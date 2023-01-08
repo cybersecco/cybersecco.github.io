@@ -1,5 +1,5 @@
 ---
-title: "Articulos por etiqueta"
+title: "Artículos por etiqueta"
 permalink: /tags/
 layout: tags
 author_profile: true
