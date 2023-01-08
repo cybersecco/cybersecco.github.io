@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Creando nuestro propio NetCat"
+title: "Netcat propio en python"
 excerpt: "NetCat es una herramienta bastante util, ya que nos permite abrir puertos TCP/UPD en un host, leer y escribir datos en la red, puede ejecutar comandos remotos, puede abrir una shell remota, entre otras cosas. Aqui crearemos una en nuestro lenguaje de confianza, python. "
 date: 2022-08-03 
 classes: wide
