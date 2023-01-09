@@ -1,14 +1,16 @@
 ---
 layout: single
-title: "TryHackMe ChillHack Writeup"
-excerpt: "En este writeup nos enfrentamos a un sitio web el cual tiene ejecucion remota de comandos y aprovechandonos de eso, obtenemos acceso al servidor donde esta alojado el sitio web."
+title: "ChillHack - Try Hack Me"
+excerpt: "Este writeup detalla el proceso que se llevo a cabo para hackear la maquina objetivo llamada ChillHack de TryHackMe. Tiene un sitio web el cual tiene diferentes vulnerabilidades que se pueden explotar para comprometer el sistema. Intentando despues con movimientos lateral poder acceder a usuarios del servido para poder ganar acceso con altos privilegios. Utilizando diferentes herramientas y tecnicas de hacking incluyendo nmap, gobuster, whatweb, netcat."
 date: 2023-01-08
 classes: wide
 header:
  teaser: /assets/images/chillHack/chillHack.png
  teaser_home_page: true
+ icon: /assets/images/thm.webp
 categories:
   - CTF
+  - Free
 tags:
   - security
   - hacking web
@@ -16,11 +18,11 @@ tags:
   - sql injection
 ---
 
-
+![](/assets/images/chillHack/chillHack.png)
 
 ## Introduccion
 
-Este writeup detalla el proceso que se llevo a cabo para hackear la maquina objetivo llamada "ChillHack" de TryHackMe. Tiene un sitio web el cual tiene diferentes vulnerabilidades que se pueden explotar para comprometer el sistema. Utilizando diferentes herramientas y tecnicas de hacking incluyendo `nmap, gobuster, whatweb, netcat`.
+Este writeup detalla el proceso que se llevo a cabo para hackear la maquina objetivo llamada "ChillHack" de TryHackMe. Tiene un sitio web el cual tiene diferentes vulnerabilidades que se pueden explotar para comprometer el sistema. Intentando despues con movimientos lateral poder acceder a usuarios del servido para poder ganar acceso con altos privilegios. Utilizando diferentes herramientas y tecnicas de hacking incluyendo `nmap, gobuster, whatweb, netcat`.
 
 ## Escaneo
 
