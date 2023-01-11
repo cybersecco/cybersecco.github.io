@@ -1,11 +1,11 @@
 ---
 layout: single
-title: "Netcat propio en python"
-excerpt: "NetCat es una herramienta bastante util, ya que nos permite abrir puertos TCP/UPD en un host, leer y escribir datos en la red, puede ejecutar comandos remotos, puede abrir una shell remota, entre otras cosas. Aqui crearemos una en nuestro lenguaje de confianza, python. "
+title: "Como crear tu propia herramienta de hacking con Netcat en Python"
+excerpt: "¡Este es nuestro ejemplo de Netcat en Python! En este tutorial, aprenderás cómo crear una herramienta de red de bajo nivel utilizando el lenguaje de programación Python. A través de la creación de una versión de Netcat, aprenderás sobre la creación de conexiones de red, el manejo de flujos de datos y la transmisión de información en tiempo real. Este tutorial es adecuado tanto para principiantes como para usuarios con experiencia en Python y es una excelente forma de ampliar tus habilidades en programación de redes. ¡Prepárate para sumergirte en el mundo de la programación de redes con Python! "
 date: 2022-08-03 
 classes: wide
 header:
- teaser:
+ teaser: /assets/images/netcat/nc.png
  teaser_home_page: true
 categories:
   - programacion

@@ -1,7 +1,7 @@
 ---
 layout: single
-title: "Teoria y creacion de un keylogger basico"
-excerpt: "Un keylogger es un programa comúnmente utilizado por actores maliciosos para registrar y almacenar las pulsaciones del teclado con la intención de robar contraseñas o espiar en el equipo de la víctima. "
+title: "Entendiendo los keyloggers: teoría y creación de un keylogger básico en Python"
+excerpt: "En este post, aprenderás acerca de los conceptos básicos de los keyloggers, así como sobre cómo crear un keylogger básico en Python. A través de la creación de una herramienta de este tipo, aprenderás sobre la captura de entrada del usuario, el manejo de flujos de datos y la transmisión de información en tiempo real. Aunque es importante mencionar que los keyloggers son considerados una herramienta peligrosa y su uso indebido puede ser ilegal y violar la privacidad de las personas. "
 date: 2022-06-30
 classes: wide
 header:

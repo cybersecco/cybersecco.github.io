@@ -1,8 +1,7 @@
 ---
 layout: single
-title: Conceptos basicos de Ciberseguridad, diferentes tipos y amenazas 
-excerpt: "Hoy en dia las personas usan continuamente Internet para anunciar productos, ventas, para comunicarse con las demas personas, para realizar transacciones financieras, debido a esto los ciber criminales o ciber delincuentes utlizan el Internet como herramienta para realizar ataques ciberneticos ya sea propagacion de malware, entre otros.
-"
+title: "Introducción a los conceptos básicos de la ciberseguridad: tipos de amenazas y cómo protegerse"
+excerpt: "Estos son conceptos básicos de la ciberseguridad! En este post, exploraremos los diferentes tipos de amenazas y ataques cibernéticos a los que están expuestos los individuos y las organizaciones. Aprenderás acerca de las técnicas y herramientas utilizadas por los ciberdelincuentes, así como sobre cómo protegerte y proteger tu información."
 date: 2022-06-01
 classes: wide 
 header:

@@ -1,7 +1,7 @@
 ---
 layout: single
-title: Cliente-servidor basico del protocolo de red TCP y UDP
-excerpt: "En ocasiones nos encontramos en maquinas que no cuentan con herramientas para ejecutar ataques de red, por lo que es mejor desarrollar nuestras propias herramientas y llevarlas en nuestras cabeza en todo momento."
+title: Aprende a crear una aplicación cliente-servidor con TCP y UDP en Python
+excerpt: "Tutorial sobre la creación de un cliente-servidor básico utilizando el protocolo de red TCP y UDP en Python! En este tutorial, aprenderás cómo utilizar las funcionalidades de sockets de Python para crear una aplicación cliente-servidor. Aprenderás sobre la diferencia entre el protocolo TCP y UDP y cuándo utilizar uno u otro. Además, profundizarás en los conceptos de conexión, comunicación y transmisión de datos en tiempo real a través de redes. "
 date: 2022-07-17
 classes: wide 
 header:
