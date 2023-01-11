@@ -8,7 +8,7 @@ header:
  teaser: /assets/images/ciberseguridad/cyberimg.png
  teaser_home_page: true
 categories:
-- ciberseguridad
+- Ciberseguridad
 tags:
 - seguridad
 - colombia

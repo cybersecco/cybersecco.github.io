@@ -8,8 +8,7 @@ header:
  teaser: /assets/images/netcat/nc.png
  teaser_home_page: true
 categories:
-  - programacion
-  - ciberseguridad
+  - Programación
 tags:
   - seguridad
   - herramienta

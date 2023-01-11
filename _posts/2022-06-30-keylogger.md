@@ -8,7 +8,7 @@ header:
  teaser: /assets/images/keylogger/keylogger.png
  teaser_home_page: true
 categories:
-  - programacion
+  - Programación
 tags:
   - seguridad
   - spyware

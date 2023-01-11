@@ -9,11 +9,10 @@ header:
  teaser_home_page: true
  icon: /assets/images/thm.webp
 categories:
-  - CTF
+  - THM
   - Free
 tags:
   - hacking web
-  - security
   - esteganografía
 ---
 

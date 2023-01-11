@@ -8,7 +8,7 @@ header:
  teaser: /assets/images/TCP-network/tcp0.png
  teaser_home_page: true
 categories:
-- programacion
+- Programación
 tags:
 - seguridad ofensiva
 - python

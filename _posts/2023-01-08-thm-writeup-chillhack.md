@@ -9,10 +9,9 @@ header:
  teaser_home_page: true
  icon: /assets/images/thm.webp
 categories:
-  - CTF
+  - THM
   - Free
 tags:
-  - security
   - hacking web
   - command injection
   - sql injection
