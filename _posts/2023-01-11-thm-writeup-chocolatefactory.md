@@ -5,7 +5,7 @@ excerpt: "En este desafío, tendrás la oportunidad de poner en práctica tus ha
 date: 2023-01-11
 classes: wide
 header:
- teaser: /assets/images/chocolateFactory/e2eed78e92b4890174e0a2510b6e7a7c.jpeg
+ teaser: /assets/images/THM/chocolateFactory/e2eed78e92b4890174e0a2510b6e7a7c.jpeg
  teaser_home_page: true
  icon: /assets/images/thm.webp
 categories:
@@ -16,7 +16,7 @@ tags:
   - esteganografía
 ---
 
-![](/assets/images/chocolateFactory/e2eed78e92b4890174e0a2510b6e7a7c.jpeg)
+![](/assets/images/THM/chocolateFactory/e2eed78e92b4890174e0a2510b6e7a7c.jpeg)
 
 ## Introduccion
 

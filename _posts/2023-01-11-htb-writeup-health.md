@@ -5,12 +5,12 @@ excerpt: "Health es una máquina Linux de calificación media donde se utilizó 
 date: 2023-01-11
 classes: wide
 header:
- teaser: /assets/images/health/health.png
+ teaser: /assets/images/HTB/health/health.png
  teaser_home_page: true
  icon: /assets/images/hackthebox.webp
 categories:
   - HTB
-  - Free 
+  - Paid
 tags:
   - web enumeration
   - abusing webhook setup
@@ -18,7 +18,7 @@ tags:
   - ssrf
 ---
 
-![](/assets/images/health/fullHealth.png)
+![](/assets/images/HTB/health/fullHealth.png)
 
 ## Introducción
 
