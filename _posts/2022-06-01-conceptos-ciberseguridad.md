@@ -8,11 +8,10 @@ header:
  teaser: /assets/images/ciberseguridad/cyberimg.png
  teaser_home_page: true
 categories:
-- Ciberseguridad
+- Conceptos
 tags:
 - seguridad
 - colombia
-- conceptos
 ---
 
 Se puede definir como el conjunto de herramientas, procesos y practicas periodicas para proteger los datos, las redes  y las computadoras  porque asi se pueden evitar ataques ciberneticos y el uso indebido de la informacion. Hoy en dia las personas usan continuamente Internet para anunciar productos, ventas, para comunicarse con las demas personas, para realizar transacciones financieras, debido a esto los ciber criminales o ciber delincuentes utlizan el Internet como herramienta para realizar ataques ciberneticos ya sea propagacion de malware, entre otros.

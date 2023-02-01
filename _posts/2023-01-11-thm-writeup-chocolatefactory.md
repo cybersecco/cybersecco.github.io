@@ -10,7 +10,7 @@ header:
  icon: /assets/images/thm.webp
 categories:
   - THM
-  - Free
+  - Linux
 tags:
   - hacking web
   - esteganografía

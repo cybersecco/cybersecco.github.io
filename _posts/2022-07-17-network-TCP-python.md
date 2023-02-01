@@ -12,7 +12,6 @@ categories:
 tags:
 - seguridad ofensiva
 - python
-- conceptos
 - herramientas
 - protocolo de red
 ---

@@ -10,7 +10,6 @@ header:
  icon: /assets/images/vulnhub.webp
 categories:
   - VulnHub
-  - Free 
 tags:
   - hacking web
   - virtual hosting
